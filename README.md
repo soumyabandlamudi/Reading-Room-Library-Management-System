@@ -347,6 +347,14 @@ sql/
 
 Developed as part of an academic project to demonstrate full-stack web application development, database connectivity, server-side programming and secure library management.
 
+
+## Project Demonstration Video
+
+Watch the complete demonstration of our Reading Room Library Management System:
+
+[Click here to watch the project demo](https://drive.google.com/file/d/1L26EnIoEuoEGzSklajkbi806_5_eClaj/view?usp=sharing)
+
+
 ## License
 
 This project is developed for academic and educational purposes.
