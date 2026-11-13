@@ -1,0 +1,14 @@
+
+# Oracle database configuration
+db.driver=oracle.jdbc.OracleDriver
+db.url=jdbc:oracle:thin:@localhost:1521:XE
+db.user=YOUR_DATABASE_USERNAME
+db.password=YOUR_DATABASE_PASSWORD
+
+# Library rules
+loan.days=14
+fine.per.day=5
+max.loans=5
+
+# Error display
+show.errors=false

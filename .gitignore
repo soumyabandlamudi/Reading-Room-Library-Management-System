@@ -1,0 +1,39 @@
+
+# Maven build output
+target/
+
+# Java compiled files
+*.class
+
+# Packaged applications
+*.war
+*.ear
+
+# Logs
+*.log
+
+# Local database configuration
+src/main/resources/db.properties
+
+# Oracle JDBC driver
+src/main/webapp/WEB-INF/lib/ojdbc*.jar
+
+# IDE temporary files
+.metadata/
+bin/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.bak
+
+# Environment files
+.env
+.env.*
+
+# Keep example environment files
+!.env.example

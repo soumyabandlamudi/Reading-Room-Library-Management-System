@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><c:out value="${pageTitle}"/> &middot; Reading Room</title>
+  <script src="${ctx}/js/app.js"></script>
+  <link rel="stylesheet" href="${ctx}/css/style.css">
+</head>
+<body>
+<c:set var="here" value="${requestScope['javax.servlet.forward.servlet_path']}"/>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="${ctx}/home"><span class="logo">R</span><span>Reading Room</span></a>
+    <c:choose>
+      <c:when test="${not empty sessionScope.user}">
+        <nav class="nav-links">
+          <c:if test="${sessionScope.user.admin}"><a href="${ctx}/admin/dashboard" class="${here == '/admin/dashboard' ? 'active' : ''}">Dashboard</a></c:if>
+          <a href="${ctx}/books" class="${here == '/books' ? 'active' : ''}">Catalogue</a>
+          <c:choose>
+            <c:when test="${sessionScope.user.admin}">
+              <a href="${ctx}/admin/books" class="${here == '/admin/books' ? 'active' : ''}">Manage books</a>
+              <a href="${ctx}/admin/loans" class="${here == '/admin/loans' ? 'active' : ''}">Loans</a>
+              <a href="${ctx}/admin/members" class="${here == '/admin/members' ? 'active' : ''}">Members</a>
+            </c:when>
+            <c:otherwise>
+              <a href="${ctx}/my-books" class="${here == '/my-books' ? 'active' : ''}">My books</a>
+            </c:otherwise>
+          </c:choose>
+        </nav>
+      </c:when>
+      <c:otherwise>
+        <nav class="nav-links">
+          <a href="${ctx}/login" class="${here == '/login' ? 'active' : ''}">Log in</a>
+          <a href="${ctx}/register" class="${here == '/register' ? 'active' : ''}">Create account</a>
+        </nav>
+      </c:otherwise>
+    </c:choose>
+    <div class="nav-tools">
+      <select class="mini" data-palette-select aria-label="Colour palette" title="Colour palette">
+        <option value="ocean">Ocean</option>
+        <option value="emerald">Emerald</option>
+        <option value="violet">Violet</option>
+        <option value="rose">Rose</option>
+        <option value="mono">Mono</option>
+      </select>
+      <button type="button" class="btn ghost sm" data-theme-toggle>Dark mode</button>
+      <c:if test="${not empty sessionScope.user}">
+        <a class="who" href="${ctx}/account" title="Change password"><span class="avatar"><c:out value="${fn:toUpperCase(fn:substring(sessionScope.user.name, 0, 1))}"/></span><c:out value="${sessionScope.user.name}"/></a>
+        <form method="post" action="${ctx}/logout" class="inline">
+          <input type="hidden" name="csrf" value="${sessionScope.csrf}">
+          <button class="btn ghost sm">Log out</button>
+        </form>
+      </c:if>
+    </div>
+  </div>
+</header>
+<main class="page">
+<c:if test="${sessionScope.weakAdmin}">
+  <div class="alert warn">You are using the default librarian password. <a href="${ctx}/account">Change it now</a>.</div>
+</c:if>
+<c:if test="${not empty sessionScope.flash}">
+  <div class="alert ${sessionScope.flashType}"><c:out value="${sessionScope.flash}"/></div>
+  <c:remove var="flash" scope="session"/><c:remove var="flashType" scope="session"/>
+</c:if>
